@@ -23,9 +23,9 @@ namespace WpfTwainExtendedImageInfoDemo
         #endregion
 
 
-        
+
         #region Constructor
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -38,8 +38,8 @@ namespace WpfTwainExtendedImageInfoDemo
 
         #endregion
 
-        
-        
+
+
         #region Methods
 
         private void Window_Loaded(object sender, EventArgs e)
@@ -79,17 +79,36 @@ namespace WpfTwainExtendedImageInfoDemo
         {
             SetFormUiState(false);
 
-            // try to find the device manager 2.x
-            _deviceManager.IsTwain2Compatible = true;
-            // if TWAIN device manager .x is not available
-            if (!_deviceManager.IsTwainAvailable)
+            try
             {
-                // try to use TWAIN device manager 1.x
-                _deviceManager.IsTwain2Compatible = false;
-                // if TWAIN device manager 1.x is not available
+                // try to find the device manager 2.x
+                _deviceManager.IsTwain2Compatible = true;
+                // if TWAIN device manager .x is not available
                 if (!_deviceManager.IsTwainAvailable)
                 {
-                    MessageBox.Show("TWAIN device manager is not found.");
+                    // try to use TWAIN device manager 1.x
+                    _deviceManager.IsTwain2Compatible = false;
+                    // if TWAIN device manager 1.x is not available
+                    if (!_deviceManager.IsTwainAvailable)
+                    {
+                        MessageBox.Show("TWAIN device manager is not found.");
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // show dialog with error message
+                MessageBox.Show(ex.Message, "TWAIN device manager", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            // if 64-bit TWAIN2 device manager is used
+            if (IntPtr.Size == 8 && _deviceManager.IsTwain2Compatible)
+            {
+                if (!InitTwain2DeviceManagerMode())
+                {
+                    MessageBox.Show("TWAIN device manager is not opened.");
                     return false;
                 }
             }
@@ -108,18 +127,61 @@ namespace WpfTwainExtendedImageInfoDemo
             return true;
         }
 
+        /// <summary>
+        /// Initializes the device manager mode.
+        /// </summary>
+        private bool InitTwain2DeviceManagerMode()
+        {
+            // create a window that allows to view and edit mode of 64-bit TWAIN2 device manager
+            SelectDeviceManagerModeWindow window = new SelectDeviceManagerModeWindow();
+            // initialize window
+            window.Owner = this;
+            window.Use32BitDevices = _deviceManager.Are32BitDevicesUsed;
+
+            // show dialog
+            if (window.ShowDialog() == true)
+            {
+                // if device manager mode is changed
+                if (window.Use32BitDevices != _deviceManager.Are32BitDevicesUsed)
+                {
+                    try
+                    {
+                        // if 32-bit devices must be used
+                        if (window.Use32BitDevices)
+                            _deviceManager.Use32BitDevices();
+                        else
+                            _deviceManager.Use64BitDevices();
+                    }
+                    catch (TwainDeviceManagerException ex)
+                    {
+                        // show dialog with error message
+                        MessageBox.Show(ex.Message, "TWAIN device manager", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
+
+            return true;
+        }
 
         /// <summary>
         /// Acquire image.
         /// </summary>
         private void acquireImageButton_Click(object sender, EventArgs e)
         {
+            acquireImageButton.IsEnabled = false;
             try
             {
                 // select the device
                 if (!_deviceManager.ShowDefaultDeviceSelectionDialog())
                 {
                     MessageBox.Show("Device is not selected.");
+                    acquireImageButton.IsEnabled = true;
                     return;
                 }
 
@@ -147,6 +209,7 @@ namespace WpfTwainExtendedImageInfoDemo
                     // close the device
                     device.Close();
                     MessageBox.Show("Device does not support extended image information.");
+                    acquireImageButton.IsEnabled = true;
                     return;
                 }
 
@@ -159,6 +222,7 @@ namespace WpfTwainExtendedImageInfoDemo
             catch (TwainException ex)
             {
                 MessageBox.Show(ex.Message, "Error");
+                acquireImageButton.IsEnabled = true;
             }
         }
 
@@ -228,6 +292,8 @@ namespace WpfTwainExtendedImageInfoDemo
         {
             // close the device
             _currentDevice.Close();
+
+            acquireImageButton.IsEnabled = true;
         }
 
 
