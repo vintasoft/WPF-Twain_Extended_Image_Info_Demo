@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("VintaSoft WPF TWAIN Extended Image Info Demo")]
 [assembly: AssemblyDescription("Shows how to get extended image info from scanner.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("VintaSoft Ltd.")]
+[assembly: AssemblyCompany("VintaSoft Llc.")]
 [assembly: AssemblyProduct("WPF Twain Extended Image Info Demo")]
-[assembly: AssemblyCopyright("Copyright VintaSoft Ltd. 2024")]
+[assembly: AssemblyCopyright("Copyright VintaSoft Llc. 2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
