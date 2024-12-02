@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("VintaSoft WPF TWAIN Extended Image Info Demo")]
 [assembly: AssemblyDescription("Shows how to get extended image info from scanner.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("VintaSoft Llc.")]
+[assembly: AssemblyCompany("VintaSoft LLC")]
 [assembly: AssemblyProduct("WPF Twain Extended Image Info Demo")]
-[assembly: AssemblyCopyright("Copyright VintaSoft Llc. 2024")]
+[assembly: AssemblyCopyright("Copyright VintaSoft LLC 2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -51,5 +51,5 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("15.0.6.1")]
-[assembly: AssemblyFileVersion("15.0.6.1")]
+[assembly: AssemblyVersion("15.1.0.1")]
+[assembly: AssemblyFileVersion("15.1.0.1")]
