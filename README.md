@@ -1,4 +1,4 @@
-# VintaSoft WPF TWAIN Extended Image Info Demo
+﻿# VintaSoft WPF TWAIN Extended Image Info Demo
 
 This WinForms project uses <a href="https://www.vintasoft.com/vstwain-dotnet-index.html">VintaSoft TWAIN .NET SDK</a> and demonstrates how to get extended image information about scanned image from TWAIN image scanner.
 
