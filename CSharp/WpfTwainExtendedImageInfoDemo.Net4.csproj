@@ -80,7 +80,7 @@
     <Reference Include="System.Xaml" />
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
-    <PackageReference Include="Vintasoft.WpfTwain" Version="15.5.0.1" />
+    <PackageReference Include="Vintasoft.WpfTwain" Version="15.5.1.1" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

@@ -18,7 +18,7 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>   
 
-    <Version>15.5.0.1</Version>
+    <Version>15.5.1.1</Version>
     <ApplicationIcon>App.ico</ApplicationIcon>
   </PropertyGroup>
 
@@ -47,7 +47,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Vintasoft.WpfTwain" Version="15.5.0.1" />
+    <PackageReference Include="Vintasoft.WpfTwain" Version="15.5.1.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs" />
