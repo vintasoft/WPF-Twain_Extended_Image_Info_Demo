@@ -47,7 +47,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Vintasoft.WpfTwain" Version="15.5.1.1" />
+    <PackageReference Include="Vintasoft.WpfTwain" Version="15.5.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs" />
